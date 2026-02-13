@@ -1,1 +1,73 @@
-This is Day 2
+Complete DevOps Practical Workflow 
+1. VMware Setup (Windows)
+• Install VMware Workstation Player.
+• Create Ubuntu Server VM (4GB RAM, 20GB Disk, NAT Network).
+• Start VM and login.
+2. Ubuntu Server Initial Configuration
+sudo apt update 
+sudo apt upgrade -y
+ip a
+sudo apt install openssh-server -y
+sudo systemctl start ssh
+sudo systemctl enable ssh
+sudo ufw allow ssh
+sudo ufw reload
+3. SSH from Windows PowerShell
+ssh username@VM_IP
+4. VS Code Remote SSH Setup
+• Install VS Code
+• Install 'Remote - SSH' Extension
+• Connect using SSH
+hostname
+5. Docker Installation in Ubuntu
+sudo apt install ca-certificates curl -y
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+newgrp docker
+6. Docker Image Workflow
+docker build -t image_name:tag .
+docker images
+docker run -d -p host_port:container_port image_name:tag
+docker login
+docker tag image_name:tag username/repository:tag
+docker push username/repository:tag
+docker pull username/repository:tag
+docker ps
+docker stop container_name
+docker rm container_name
+docker rmi image_name
+7. Git & GitHub Configuration
+git --version
+git config --global user.name "YourName"
+git config --global user.email "your_email@example.com"
+ssh-keygen -t ed25519 -C "your_email@example.com"
+cat ~/.ssh/id_ed25519.pub
+ssh -T git@github.com
+git clone git@github.com:username/repository.git
+git add .
+git commit -m "commit message"
+git push -u origin main
+git branch
+git checkout -b dev
+8. Practical Commands Executed in VM
+docker build -t vaishnavisubramaniam/docker_sample:latest .
+docker push vaishnavisubramaniam/docker_sample:latest
+docker build -t vaishnavisubramaniam/mynginxweb:1.0 .
+docker push vaishnavisubramaniam/mynginxweb:1.0
+docker pull vaishnavisubramaniam/mynginxweb:1.0
+docker run --name mywebapp -p 5000:80 -d vaishnavisubramaniam/mynginxweb:1.0
+Final Outcome
+✔ VMware setup completed
+✔ Ubuntu Server installed
+✔ SSH configured
+✔ VS Code remote connection established
+✔ Docker installed and configured
+✔ Docker images built, tagged, pushed, and pulled
+✔ GitHub SSH authentication configured
+✔ Containers successfully deployed
